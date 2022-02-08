@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from './Button';
+import s from './CounterV1.module.scss';
 
 interface ICounterButtonsType {
     value: number
@@ -14,9 +15,9 @@ export const CounterButtons = ({value, error, setValue, errorButtonReset}: ICoun
     const handlerReset = () => setValue(0)
 
     return (
-        <div className={'buttons__wrapper'}>
-            <Button className={'button'} disabled={error} name={'incr'} callBack={handlerClick}/>
-            <Button className={'button'} disabled={errorButtonReset} name={'reset'} callBack={handlerReset}/>
+        <div className={s.buttons__wrapper}>
+            <Button className={s.button} disabled={error} name={'incr'} callBack={handlerClick}/>
+            <Button className={s.button} disabled={errorButtonReset} name={'reset'} callBack={handlerReset}/>
         </div>
     );
 };

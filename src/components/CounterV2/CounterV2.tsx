@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {Box, ThemeProvider} from '@mui/material';
-import {SettingCounter} from './CounterV2/SettingCounter';
-import {Counter} from './CounterV2/Counter';
-import {theme} from '../../styles/styleMU';
-import '../../styles/CounterV2.scss';
+import {SettingCounter} from './SettingCounter';
+import {Counter} from './Counter';
+import {theme} from './style';
+import './CounterV2.scss';
 
 export const CounterV2 = () => {
     // BLL

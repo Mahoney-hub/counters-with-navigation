@@ -1,23 +1,18 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import '../../styles/styleNav';
-import {ThemeProvider} from '@mui/material';
-import {darkTheme} from '../../styles/styleNav';
-import {NavTabs} from './NavTabs';
+import React from 'react';
+import {NavLink} from 'react-router-dom';
+import s from './HeaderNav.module.scss';
+
+type setActiveType = ((props: { isActive: boolean }) => string)
 
 export const HeaderNav = () => {
+    const setActive: setActiveType = ({isActive}) => isActive ? s.active : ''
+
     return (
-        <ThemeProvider theme={darkTheme}>
-            <Box>
-                <AppBar>
-                    <NavTabs/>
-                </AppBar>
-            </Box>
-        </ThemeProvider>
+        <nav className={s.navbar}>
+            <NavLink to={'/counter1'} className={setActive}>COUNTER_V1</NavLink>
+            <NavLink to={'/counter2'} className={setActive}>COUNTER_V2</NavLink>
+        </nav>
     );
-}
+};
+
 

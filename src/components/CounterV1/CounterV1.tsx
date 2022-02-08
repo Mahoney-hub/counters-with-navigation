@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {CounterPanel} from './CounterV1/CounterPanel';
-import {CounterButtons} from './CounterV1/CounterButtons';
-import '../../styles/CounterV1.scss';
+import {CounterPanel} from './CounterPanel';
+import {CounterButtons} from './CounterButtons';
+import s from './CounterV1.module.scss';
 
 export const CounterV1 = () => {
     const [value, setValue] = useState<number>(0)
@@ -10,8 +10,8 @@ export const CounterV1 = () => {
     const errorButtonReset = (value == 0) ? true : false
 
     return (
-        <div className={'counter__wrapper'}>
-            <div className={'counter'}>
+        <div className={s.counter__wrapper}>
+            <div className={s.counter}>
                 <CounterPanel value={value} error={error}/>
                 <CounterButtons
                     value={value}
