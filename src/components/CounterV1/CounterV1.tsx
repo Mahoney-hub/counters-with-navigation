@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {CounterPanel} from './Counter/CounterPanel';
-import {CounterButtons} from './Counter/CounterButtons';
-import '../styles/CounterV1.css';
+import {CounterPanel} from './CounterV1/CounterPanel';
+import {CounterButtons} from './CounterV1/CounterButtons';
+import '../../styles/CounterV1.scss';
 
 export const CounterV1 = () => {
     const [value, setValue] = useState<number>(0)
