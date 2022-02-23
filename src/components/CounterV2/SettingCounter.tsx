@@ -1,37 +1,40 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Box, Button, ButtonGroup, Paper, TextField, Typography} from '@mui/material';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppStateType} from '../../store/store';
+import {setCountValueAC, setMaxValueAC, setStartValueAC} from '../../store/reducers/counterV2';
 
 type SettingCounterPropsType = {
     error: boolean
-    maxValue: number
-    startValue: number
-    setMaxValue: (value: number) => void
-    setStartValue: (value: number) => void
     setError: (error: boolean) => void
-    getSettings: (maxValue: number, startValue: number) => void
     setTextOutput: (value: boolean) => void
 }
 
 export const SettingCounter = (props: SettingCounterPropsType) => {
-    const {error, maxValue, startValue, setMaxValue, setStartValue, setError, getSettings, setTextOutput} = props
+    const {error, setError, setTextOutput} = props
     const [hideButton, setHideButton] = useState<boolean>(false)
+    const startValue = useSelector<AppStateType, number>(state => state.counterV2.startValue)
+    const maxValue = useSelector<AppStateType, number>(state => state.counterV2.maxValue)
+    const dispatch = useDispatch()
+
     // Functions
     const handlerMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         const requirements = +(e.currentTarget.value) <= startValue || startValue < 0
         setError(requirements)
-        setMaxValue(+(e.currentTarget.value))
+        dispatch(setMaxValueAC(+(e.currentTarget.value)))
         setTextOutput(true)
         setHideButton(requirements)
     }
     const handlerStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const requirements = +(e.currentTarget.value) >= maxValue || +(e.currentTarget.value) < 0
         setError(requirements)
-        setStartValue(+(e.currentTarget.value))
+        dispatch(setStartValueAC(+(e.currentTarget.value)))
         setTextOutput(true)
         setHideButton(requirements)
     }
     const handlerClick = () => {
-        getSettings(maxValue, startValue)
+        // getSettings(maxValue, startValue)
+        dispatch(setCountValueAC(startValue))
         setTextOutput(false)
         setHideButton(true)
     }
@@ -50,7 +53,7 @@ export const SettingCounter = (props: SettingCounterPropsType) => {
                 />
             </Box>
             <Box m={2} className={'row'}>
-                <Typography variant={'h6'}>set value:</Typography>
+                <Typography variant={'h6'}>start value:</Typography>
                 <TextField
                     label="Number"
                     type="number"

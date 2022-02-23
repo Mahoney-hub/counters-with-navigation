@@ -1,23 +1,27 @@
 import React from 'react';
 import {Box, Button, ButtonGroup, Paper, Typography} from '@mui/material';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppStateType} from '../../store/store';
+import {setCountValueAC} from '../../store/reducers/counterV2';
 
 type CounterPropsType = {
-    count: number
-    maxValue: number
-    startValue: number
     error: boolean
     textOutput: boolean
-    setCount: (value: number) => void
 }
 
 export const Counter = (props: CounterPropsType) => {
-    const {count, maxValue, startValue, error, setCount, textOutput} = props
+    const {error,textOutput} = props
+
+    const count = useSelector<AppStateType, number>(state => state.counterV2.count)
+    const startValue = useSelector<AppStateType, number>(state => state.counterV2.startValue)
+    const maxValue = useSelector<AppStateType, number>(state => state.counterV2.maxValue)
+    const dispatch = useDispatch()
     // Functions
     const increaseValue = () => {
-        if (count !== maxValue) setCount(count + 1)
+        if (count !== maxValue) dispatch(setCountValueAC(count + 1))
     }
     const resetValue = () => {
-        if (count !== startValue) setCount(startValue)
+        if (count !== startValue) dispatch(setCountValueAC(startValue))
     }
     // Components before rendering
     const message = error
