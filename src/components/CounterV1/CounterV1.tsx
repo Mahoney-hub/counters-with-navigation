@@ -6,8 +6,8 @@ import s from './CounterV1.module.scss';
 export const CounterV1 = () => {
     const [value, setValue] = useState<number>(0)
 
-    const error = (value >= 5) ? true : false
-    const errorButtonReset = (value == 0) ? true : false
+    const error = (value >= 5)
+    const errorButtonReset = (value == 0)
 
     return (
         <div className={s.counter__wrapper}>

@@ -12,6 +12,7 @@ export const CounterV2 = () => {
     const [startValue, setStartValue] = useState<number>(0) // Начальное значение
     const [error, setError] = useState<boolean>(false) // Наличие ошибки
     const [textOutput, setTextOutput] = useState<boolean>(false) // Разврешить вывод текстового поля
+
     useEffect(() => {
         let stringCounter = localStorage.getItem('counterValue')
         let stringMaxValue = localStorage.getItem('maxValue')
