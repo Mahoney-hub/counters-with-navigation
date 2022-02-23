@@ -1,23 +1,21 @@
 import React from 'react';
 import {Button} from './Button';
 import s from './CounterV1.module.scss';
+import {useDispatch, useSelector} from 'react-redux';
+import {changeValueAC, resetValueAC} from '../../store/reducers/counterV1';
+import {AppStateType} from '../../store/store';
 
-interface ICounterButtonsType {
-    value: number
-    error: boolean
-    errorButtonReset: boolean
-    setValue: (value: number) => void
-}
-
-export const CounterButtons = ({value, error, setValue, errorButtonReset}: ICounterButtonsType) => {
-
-    const handlerClick = () => setValue(value + 1)
-    const handlerReset = () => setValue(0)
+export const CounterButtons = () => {
+    const value = useSelector<AppStateType, number>(state => state.counterV1.value)
+    const dispatch = useDispatch()
+    // Functions
+    const handlerClick = () => dispatch(changeValueAC())
+    const handlerReset = () => dispatch(resetValueAC())
 
     return (
         <div className={s.buttons__wrapper}>
-            <Button className={s.button} disabled={error} name={'incr'} callBack={handlerClick}/>
-            <Button className={s.button} disabled={errorButtonReset} name={'reset'} callBack={handlerReset}/>
+            <Button className={s.button} disabled={value >= 5} name={'incr'} callBack={handlerClick}/>
+            <Button className={s.button} disabled={value === 0} name={'reset'} callBack={handlerReset}/>
         </div>
     );
 };
